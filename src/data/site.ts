@@ -15,8 +15,8 @@ export const site = {
    */
   enConstruction: true,
 
-  name: 'David Bastard Électricité',
-  shortName: 'DB Élec',
+  name: 'BTD Energie',
+  shortName: 'BTD Energie',
   owner: 'David Bastard',
   tagline: 'Électricien indépendant, dépannage et installation',
   description:

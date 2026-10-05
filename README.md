@@ -1,4 +1,4 @@
-# David Bastard Électricité — site vitrine
+# BTD Energie — site vitrine (électricien)
 
 Site vitrine statique pour un électricien indépendant : présentation des services,
 zone d'intervention, réalisations, avis, FAQ et **tous les moyens de contact**
@@ -6,7 +6,7 @@ zone d'intervention, réalisations, avis, FAQ et **tous les moyens de contact**
 
 Hébergé gratuitement sur GitHub Pages, déployé automatiquement à chaque push sur `main`.
 
-**URL actuelle :** https://vcheloudiakoff.github.io/david-bastard-elec/
+**URL actuelle :** https://vcheloudiakoff.github.io/btd-energie/
 
 ## Choix techniques (et pourquoi)
 
@@ -23,7 +23,7 @@ Hébergé gratuitement sur GitHub Pages, déployé automatiquement à chaque pus
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321/david-bastard-elec/
+npm run dev        # http://localhost:4321/btd-energie/
 npm run build      # génère dist/
 npm run preview    # prévisualise dist/
 npm run check      # vérification TypeScript / Astro
@@ -71,16 +71,16 @@ scripts/generate-images.mjs ← image de partage (Open Graph) et icône iOS
 
 ### Nom de domaine (recommandé, ≈ 10 €/an)
 
-Quand David aura un domaine (ex. `david-bastard-elec.fr` chez OVH, Gandi, Ionos…) :
+Quand David aura un domaine (ex. `btd-energie.fr` chez OVH, Gandi, Ionos…) :
 
-1. `astro.config.mjs` : `site: 'https://david-bastard-elec.fr'` et `base: '/'`.
-2. Créer `public/CNAME` contenant `david-bastard-elec.fr`.
+1. `astro.config.mjs` : `site: 'https://btd-energie.fr'` et `base: '/'`.
+2. Créer `public/CNAME` contenant `btd-energie.fr`.
 3. Chez le registrar, ajouter les enregistrements DNS :
    - `A` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `CNAME www` → `vcheloudiakoff.github.io`
 4. GitHub → *Settings → Pages → Custom domain*, cocher *Enforce HTTPS*.
 
-Le domaine permet aussi une adresse e-mail pro (`contact@david-bastard-elec.fr`),
+Le domaine permet aussi une adresse e-mail pro (`contact@btd-energie.fr`),
 souvent incluse chez le registrar.
 
 ## Check-list pour David (infos à fournir)

@@ -1,10 +1,10 @@
 /**
  * Préfixe un chemin interne avec la base du site.
- * Tant que le site est servi sous /david-bastard-elec (GitHub Pages sans
+ * Tant que le site est servi sous /btd-energie (GitHub Pages sans
  * domaine), tous les liens internes doivent passer par ici.
- *   href('/')                 → /david-bastard-elec/
- *   href('/#contact')         → /david-bastard-elec/#contact
- *   href('/mentions-legales/')→ /david-bastard-elec/mentions-legales/
+ *   href('/')                 → /btd-energie/
+ *   href('/#contact')         → /btd-energie/#contact
+ *   href('/mentions-legales/')→ /btd-energie/mentions-legales/
  */
 export function href(path: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');

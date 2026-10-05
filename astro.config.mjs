@@ -5,12 +5,12 @@ import sitemap from '@astrojs/sitemap';
 
 // ─────────────────────────────────────────────────────────────────────
 // Hébergement actuel : GitHub Pages, sans nom de domaine.
-//   → https://vcheloudiakoff.github.io/david-bastard-elec/
+//   → https://vcheloudiakoff.github.io/btd-energie/
 //
-// Le jour où un nom de domaine est acheté (ex. david-bastard-elec.fr) :
-//   1. site: 'https://david-bastard-elec.fr'
+// Le jour où un nom de domaine est acheté (ex. btd-energie.fr) :
+//   1. site: 'https://btd-energie.fr'
 //   2. base: '/'
-//   3. créer le fichier public/CNAME contenant « david-bastard-elec.fr »
+//   3. créer le fichier public/CNAME contenant « btd-energie.fr »
 //   4. GitHub → Settings → Pages → Custom domain, puis DNS chez le registrar
 //      (voir README « Nom de domaine »).
 // Les liens internes passent tous par href() dans src/lib/utils.ts,
@@ -18,7 +18,7 @@ import sitemap from '@astrojs/sitemap';
 // ─────────────────────────────────────────────────────────────────────
 export default defineConfig({
   site: 'https://vcheloudiakoff.github.io',
-  base: '/david-bastard-elec',
+  base: '/btd-energie',
   trailingSlash: 'ignore',
   vite: { plugins: [tailwindcss()] },
   integrations: [sitemap()],
