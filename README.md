@@ -66,7 +66,8 @@ scripts/generate-images.mjs ← image de partage (Open Graph) et icône iOS
 ## Déploiement
 
 1. **Une seule fois** : sur GitHub, *Settings → Pages → Build and deployment → Source : GitHub Actions*.
-   (Le workflow essaie de l'activer tout seul ; si le premier run échoue, faire ce réglage puis relancer.)
+   Sans ce réglage, l'étape « Déployer » échoue avec « Not Found » : le jeton du workflow
+   n'a pas le droit d'activer Pages lui-même. Le dépôt doit aussi être public (plan gratuit).
 2. Ensuite, chaque `git push` sur `main` reconstruit et publie le site (≈ 1 min).
 
 ### Nom de domaine (recommandé, ≈ 10 €/an)

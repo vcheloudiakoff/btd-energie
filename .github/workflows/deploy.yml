@@ -1,5 +1,6 @@
 # Déploiement automatique sur GitHub Pages à chaque push sur `main`.
 # Prérequis (une seule fois) : GitHub → Settings → Pages → Source : « GitHub Actions ».
+# (Le jeton automatique du workflow n'a pas le droit d'activer Pages lui-même.)
 name: Déployer sur GitHub Pages
 
 on:
@@ -22,10 +23,6 @@ jobs:
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v7
-      - name: Activer GitHub Pages si nécessaire
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Installer, construire et téléverser le site
         uses: withastro/action@v6
 
