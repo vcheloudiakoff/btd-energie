@@ -1,0 +1,79 @@
+---
+import { Phone, Menu, X } from '@lucide/astro';
+import { site } from '../data/site';
+import { href, telHref, formatPhone } from '../lib/utils';
+import Logo from './Logo.astro';
+
+const nav = [
+  { label: 'Services', to: '/#services' },
+  { label: 'Zone', to: '/#zone' },
+  { label: 'Réalisations', to: '/#realisations' },
+  { label: 'Avis', to: '/#avis' },
+  { label: 'FAQ', to: '/#faq' },
+  { label: 'Contact', to: '/#contact' },
+];
+---
+<header class="no-print sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href={href('/')} class="flex items-center gap-2.5 text-navy-900" aria-label={`${site.name} — accueil`}>
+      <Logo class="h-9 w-9 shrink-0" />
+      <span class="leading-tight">
+        <span class="block text-[15px] font-bold">{site.name}</span>
+        <span class="hidden text-xs text-slate-500 sm:block">{site.tagline}</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex" aria-label="Navigation principale">
+      {nav.map((item) => (
+        <a href={href(item.to)} class="transition hover:text-navy-900">{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a href={telHref(site.phone)} class="btn-primary hidden py-2.5! sm:inline-flex">
+        <Phone class="h-4 w-4" />
+        <span>{formatPhone(site.phone)}</span>
+      </a>
+      <a href={telHref(site.phone)} class="btn-primary px-3! py-2.5! sm:hidden" aria-label="Appeler">
+        <Phone class="h-5 w-5" />
+      </a>
+      <button
+        id="menu-btn"
+        type="button"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy-900 ring-1 ring-slate-200 md:hidden"
+        aria-expanded="false"
+        aria-controls="menu-mobile"
+        aria-label="Ouvrir le menu"
+      >
+        <Menu class="h-5 w-5" data-icon="open" />
+        <X class="hidden h-5 w-5" data-icon="close" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="menu-mobile" class="hidden border-t border-slate-200 bg-white md:hidden" aria-label="Navigation mobile">
+    <ul class="container-x flex flex-col py-2">
+      {nav.map((item) => (
+        <li>
+          <a href={href(item.to)} class="block py-3 text-base font-medium text-slate-800">{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu-mobile');
+  if (btn && menu) {
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('hidden', open!);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+      btn.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
+      btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', open!);
+    };
+    btn.addEventListener('click', () => setOpen(menu.classList.contains('hidden')));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  }
+</script>

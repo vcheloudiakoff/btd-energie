@@ -1,0 +1,38 @@
+---
+import { Star, ExternalLink } from '@lucide/astro';
+import { site, avis } from '../data/site';
+---
+<section id="avis" class="section scroll-mt-20">
+  <div class="container-x">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Avis clients</span>
+        <h2 class="h2">Ils m’ont fait confiance</h2>
+        {site.enConstruction && (
+          <p class="mt-3 inline-block rounded-md bg-brand-100 px-2.5 py-1 text-xs font-medium text-brand-700">
+            Exemples d’avis — seront remplacés par de vrais avis Google.
+          </p>
+        )}
+      </div>
+      {site.social.google && (
+        <a href={site.social.google} target="_blank" rel="noopener" class="btn-light self-start sm:self-auto">
+          Voir tous les avis Google <ExternalLink class="h-4 w-4" />
+        </a>
+      )}
+    </div>
+
+    <ul class="mt-12 grid gap-6 md:grid-cols-3">
+      {avis.map((a) => (
+        <li class="card flex flex-col">
+          <div class="flex gap-0.5 text-brand-500" aria-label={`${a.rating} étoiles sur 5`}>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star class={`h-4.5 w-4.5 ${i < a.rating ? 'fill-current' : 'text-slate-300'}`} />
+            ))}
+          </div>
+          <blockquote class="mt-4 flex-1 text-slate-700">« {a.text} »</blockquote>
+          <p class="mt-5 text-sm font-semibold text-navy-900">{a.author}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

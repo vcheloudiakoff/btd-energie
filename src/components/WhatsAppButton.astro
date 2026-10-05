@@ -1,0 +1,20 @@
+---
+/** Bouton flottant « click-to-chat » WhatsApp, visible sur toutes les pages. */
+import { site } from '../data/site';
+import { whatsappHref } from '../lib/utils';
+import IconWhatsApp from './IconWhatsApp.astro';
+
+const message = `Bonjour ${site.owner}, je vous contacte depuis votre site pour `;
+---
+<a
+  href={whatsappHref(site.whatsapp, message)}
+  target="_blank"
+  rel="noopener"
+  class="no-print group fixed right-4 bottom-4 z-50 flex items-center gap-2 rounded-full bg-wa-500 p-3.5 text-white shadow-lg shadow-wa-700/30 transition hover:bg-wa-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wa-500 sm:right-6 sm:bottom-6"
+  aria-label="Écrire sur WhatsApp"
+>
+  <IconWhatsApp class="h-7 w-7" />
+  <span class="hidden max-w-0 overflow-hidden text-sm font-semibold whitespace-nowrap transition-all duration-300 group-hover:max-w-xs group-hover:pr-1.5 sm:block">
+    Écrire sur WhatsApp
+  </span>
+</a>

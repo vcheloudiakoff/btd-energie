@@ -1,0 +1,9 @@
+---
+/** Pictogramme éclair, utilisé dans l'en-tête et le pied de page. */
+interface Props { class?: string }
+const { class: className = 'h-9 w-9' } = Astro.props;
+---
+<svg class={className} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <rect width="64" height="64" rx="14" class="fill-brand-500" />
+  <path d="M36 8 16 36h14l-2 20 20-28H34z" class="fill-navy-950" />
+</svg>

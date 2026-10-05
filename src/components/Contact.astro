@@ -1,0 +1,153 @@
+---
+import { Phone, Mail, Clock, MapPin, Send } from '@lucide/astro';
+import { site, services } from '../data/site';
+import { telHref, formatPhone, whatsappHref, mailtoHref, digits } from '../lib/utils';
+import IconWhatsApp from './IconWhatsApp.astro';
+---
+<section id="contact" class="section scroll-mt-20">
+  <div class="container-x grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <span class="eyebrow">Contact & devis</span>
+      <h2 class="h2">Parlons de votre projet</h2>
+      <p class="lead">
+        Décrivez votre besoin, envoyez une photo si possible : je vous réponds rapidement avec un
+        premier avis et un devis gratuit.
+      </p>
+
+      <ul class="mt-8 space-y-5">
+        <li class="flex gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700"><Phone class="h-5 w-5" /></span>
+          <div>
+            <p class="text-sm font-medium text-slate-500">Téléphone</p>
+            <a href={telHref(site.phone)} class="text-lg font-bold text-navy-900 hover:text-brand-700">{formatPhone(site.phone)}</a>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-green-100 text-wa-700"><IconWhatsApp class="h-5 w-5" /></span>
+          <div>
+            <p class="text-sm font-medium text-slate-500">WhatsApp</p>
+            <a href={whatsappHref(site.whatsapp, `Bonjour ${site.owner}, `)} target="_blank" rel="noopener" class="text-lg font-bold text-navy-900 hover:text-wa-700">{formatPhone(site.whatsapp)}</a>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-navy-800"><Mail class="h-5 w-5" /></span>
+          <div>
+            <p class="text-sm font-medium text-slate-500">E-mail</p>
+            <a href={mailtoHref(site.email, 'Demande de devis')} class="text-lg font-bold break-all text-navy-900 hover:text-brand-700">{site.email}</a>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-navy-800"><Clock class="h-5 w-5" /></span>
+          <div>
+            <p class="text-sm font-medium text-slate-500">Horaires</p>
+            {site.hours.map((h) => (
+              <p class="text-slate-800"><span class="font-medium">{h.label}</span> : {h.opens.replace(':', 'h')} – {h.closes.replace(':', 'h')}</p>
+            ))}
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-navy-800"><MapPin class="h-5 w-5" /></span>
+          <div>
+            <p class="text-sm font-medium text-slate-500">Zone</p>
+            <p class="text-slate-800">{site.address.city} et alentours ({site.radiusKm} km)</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <form
+      id="form-contact"
+      class="card p-6! sm:p-8!"
+      data-wa={digits(site.whatsapp)}
+      data-email={site.email}
+      data-owner={site.owner}
+      novalidate
+    >
+      <h3 class="text-xl font-bold text-navy-900">Demande de devis</h3>
+      <p class="mt-1 text-sm text-slate-500">
+        Le message est préparé pour vous, puis envoyé depuis votre WhatsApp ou votre messagerie.
+      </p>
+
+      <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        <div>
+          <label for="nom" class="label">Votre nom</label>
+          <input id="nom" name="nom" type="text" class="field" autocomplete="name" required placeholder="Prénom Nom" />
+        </div>
+        <div>
+          <label for="tel" class="label">Votre téléphone</label>
+          <input id="tel" name="tel" type="tel" class="field" autocomplete="tel" required placeholder="06 00 00 00 00" />
+        </div>
+        <div class="sm:col-span-2">
+          <label for="type" class="label">Votre demande</label>
+          <select id="type" name="type" class="field">
+            {services.map((s) => <option value={s.title}>{s.title}</option>)}
+            <option value="Autre demande">Autre demande</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="message" class="label">Détails <span class="font-normal text-slate-400">(facultatif)</span></label>
+          <textarea id="message" name="message" rows="4" class="field" placeholder="Décrivez votre besoin, le type de logement, l’urgence…"></textarea>
+        </div>
+      </div>
+
+      <p id="form-erreur" class="mt-4 hidden text-sm font-medium text-red-600" role="alert"></p>
+
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        <button type="submit" data-via="whatsapp" class="btn-wa flex-1">
+          <IconWhatsApp class="h-4.5 w-4.5" /> Envoyer sur WhatsApp
+        </button>
+        <button type="submit" data-via="email" class="btn-light flex-1">
+          <Send class="h-4 w-4" /> Envoyer par e-mail
+        </button>
+      </div>
+
+      <p class="mt-4 text-xs leading-relaxed text-slate-500">
+        Aucune donnée n’est stockée par ce site : votre message part directement depuis votre
+        application, vers {site.owner} uniquement. Pour une urgence, préférez l’appel au
+        <a href={telHref(site.phone)} class="font-medium text-navy-900 underline">{formatPhone(site.phone)}</a>.
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('form-contact') as HTMLFormElement | null;
+  const erreur = document.getElementById('form-erreur');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const via = (event as SubmitEvent).submitter?.getAttribute('data-via') ?? 'whatsapp';
+
+    const data = new FormData(form);
+    const nom = String(data.get('nom') ?? '').trim();
+    const tel = String(data.get('tel') ?? '').trim();
+    const type = String(data.get('type') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    if (!nom || tel!) {
+      if (erreur) {
+        erreur.textContent = 'Merci d’indiquer votre nom et votre numéro de téléphone.';
+        erreur.classList.remove('hidden');
+      }
+      const champ = form.elements.namedItem(nom ? 'tel' : 'nom');
+      if (champ instanceof HTMLElement) champ.focus();
+      return;
+    }
+    erreur?.classList.add('hidden');
+
+    const lignes = [
+      `Bonjour ${form.dataset.owner},`,
+      `Je suis ${nom}. Je souhaite un devis pour : ${type}.`,
+      message ? `Détails : ${message}` : '',
+      `Vous pouvez me rappeler au ${tel}.`,
+    ].filter(Boolean);
+    const texte = lignes.join('\n');
+
+    if (via === 'email') {
+      const subject = `Demande de devis – ${type}`;
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(texte)}`;
+    } else {
+      window.open(`https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(texte)}`, '_blank', 'noopener');
+    }
+  });
+</script>

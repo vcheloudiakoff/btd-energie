@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { href, formatPhone } from '../lib/utils';
+---
+<Base title="Mentions légales" description={`Mentions légales du site ${site.name}.`} noindex>
+  <article class="container-x legal max-w-3xl py-16">
+    <h1 class="text-3xl font-bold text-navy-900 sm:text-4xl">Mentions légales</h1>
+    <p class="mt-2 text-sm text-slate-500">
+      Conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l’économie numérique.
+    </p>
+
+    <h2>Éditeur du site</h2>
+    <p>
+      <strong>{site.name}</strong> — {site.legal.form}<br />
+      Représentée par {site.owner}, directeur de la publication.<br />
+      {site.address.street && <>{site.address.street}<br /></>}
+      {site.address.postalCode} {site.address.city}, France<br />
+      Téléphone : {formatPhone(site.phone)}<br />
+      E-mail : {site.email}
+    </p>
+    <p>
+      SIRET : {site.legal.siret}<br />
+      {site.legal.rcs && <>{site.legal.rcs}<br /></>}
+      {site.legal.tva}
+    </p>
+
+    <h2>Assurance professionnelle</h2>
+    <p>
+      En application de l’article 22-2 de la loi n° 96-603 du 5 juillet 1996, l’entreprise est
+      titulaire d’une assurance de responsabilité civile professionnelle et d’une garantie décennale
+      souscrites auprès de <strong>{site.legal.insurance.company}</strong>, {site.legal.insurance.contact}.
+      Couverture géographique : {site.legal.insurance.coverage}.
+    </p>
+    {site.legal.certifications.length > 0 && (
+      <p>Qualifications : {site.legal.certifications.join(', ')}.</p>
+    )}
+
+    <h2>Hébergement</h2>
+    <p>
+      Le site est hébergé par <strong>{site.host.name}</strong>, {site.host.address} — <a href={site.host.url} target="_blank" rel="noopener">{site.host.url}</a>.
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L’ensemble des contenus de ce site (textes, visuels, logo) est la propriété de {site.name},
+      sauf mention contraire. Toute reproduction, même partielle, est interdite sans autorisation écrite.
+    </p>
+
+    <h2>Données personnelles</h2>
+    <p>
+      Ce site ne dépose aucun cookie et n’utilise aucun outil de mesure d’audience. Les informations
+      saisies dans le formulaire de contact sont transmises directement depuis votre application
+      (WhatsApp ou messagerie) et ne sont pas stockées par le site. Pour en savoir plus,
+      consultez la <a href={href('/confidentialite/')}>politique de confidentialité</a>.
+    </p>
+
+    <h2>Crédits</h2>
+    <p>
+      Icônes : <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (licence ISC)
+      et <a href="https://simpleicons.org" target="_blank" rel="noopener">Simple Icons</a> (CC0).
+      Police : <a href="https://rsms.me/inter/" target="_blank" rel="noopener">Inter</a> (licence OFL).
+    </p>
+  </article>
+</Base>

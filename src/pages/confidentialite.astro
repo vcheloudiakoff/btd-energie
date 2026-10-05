@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title="Politique de confidentialité" description={`Politique de confidentialité du site ${site.name}.`} noindex>
+  <article class="container-x legal max-w-3xl py-16">
+    <h1 class="text-3xl font-bold text-navy-900 sm:text-4xl">Politique de confidentialité</h1>
+    <p class="mt-2 text-sm text-slate-500">Dernière mise à jour : octobre 2026.</p>
+
+    <h2>En résumé</h2>
+    <ul>
+      <li>Aucun cookie, aucun traceur, aucune mesure d’audience.</li>
+      <li>Le site ne collecte ni ne stocke aucune donnée personnelle.</li>
+      <li>Le formulaire de contact prépare un message que <strong>vous</strong> envoyez depuis votre WhatsApp ou votre messagerie.</li>
+    </ul>
+
+    <h2>Responsable du traitement</h2>
+    <p>{site.name}, représentée par {site.owner} — {site.email}.</p>
+
+    <h2>Données traitées</h2>
+    <p>
+      Lorsque vous me contactez par téléphone, WhatsApp, e-mail ou via le formulaire, je reçois les
+      informations que vous choisissez de me transmettre (nom, numéro de téléphone, adresse du chantier,
+      description de votre besoin, photos). Elles servent uniquement à répondre à votre demande, établir
+      un devis et, le cas échéant, réaliser et facturer la prestation.
+    </p>
+    <p>
+      Ces échanges transitent par les services que vous utilisez (opérateur téléphonique, WhatsApp,
+      votre fournisseur de messagerie), soumis à leurs propres conditions. WhatsApp est édité par
+      Meta Platforms Ireland Ltd ; ses conditions sont consultables
+      sur <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">whatsapp.com</a>.
+    </p>
+
+    <h2>Base légale et durée de conservation</h2>
+    <p>
+      Le traitement repose sur l’exécution de mesures précontractuelles et contractuelles (devis,
+      travaux) et sur les obligations légales de facturation. Les devis et factures sont conservés
+      10 ans conformément au Code de commerce ; les échanges sans suite sont supprimés au plus tard
+      3 ans après le dernier contact.
+    </p>
+
+    <h2>Hébergement et journaux</h2>
+    <p>
+      Le site est hébergé par {site.host.name} (GitHub Pages), qui peut enregistrer des journaux
+      techniques (adresse IP, pages consultées) à des fins de sécurité.
+      Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité de GitHub</a>.
+    </p>
+
+    <h2>Vos droits</h2>
+    <p>
+      Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation et d’opposition
+      sur vos données. Pour l’exercer, écrivez à {site.email}. Vous pouvez également saisir la CNIL
+      (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).
+    </p>
+  </article>
+</Base>

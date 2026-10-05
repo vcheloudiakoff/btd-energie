@@ -1,0 +1,43 @@
+---
+import { Zap, Camera } from '@lucide/astro';
+import { realisations } from '../data/site';
+import { href } from '../lib/utils';
+---
+<section id="realisations" class="section scroll-mt-20 bg-slate-50">
+  <div class="container-x">
+    <div class="max-w-2xl">
+      <span class="eyebrow">Réalisations</span>
+      <h2 class="h2">Quelques chantiers récents</h2>
+      <p class="lead">Des interventions soignées, du petit dépannage à la rénovation complète.</p>
+    </div>
+
+    <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {realisations.map((r) => (
+        <li class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div class="relative aspect-[4/3] overflow-hidden bg-navy-900">
+            {r.image ? (
+              <img
+                src={href(r.image)}
+                alt={r.title}
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div class="hero-bg flex h-full w-full flex-col items-center justify-center gap-2 text-slate-400">
+                <Zap class="h-10 w-10 text-brand-500" />
+                <span class="inline-flex items-center gap-1.5 text-xs font-medium"><Camera class="h-3.5 w-3.5" /> Photo à venir</span>
+              </div>
+            )}
+          </div>
+          <div class="p-5">
+            <h3 class="font-bold text-navy-900">{r.title}</h3>
+            <p class="mt-1 text-sm text-slate-600">{r.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

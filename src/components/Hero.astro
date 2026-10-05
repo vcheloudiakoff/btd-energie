@@ -1,0 +1,103 @@
+---
+import { Phone, Mail, Clock, ShieldCheck, FileCheck, Timer, BadgeCheck, ArrowRight, Zap } from '@lucide/astro';
+import { site } from '../data/site';
+import { href, telHref, formatPhone, whatsappHref, mailtoHref } from '../lib/utils';
+import IconWhatsApp from './IconWhatsApp.astro';
+
+const waMessage = `Bonjour ${site.owner}, je souhaite un devis / renseignement pour `;
+const badges = [
+  { icon: FileCheck, label: 'Devis gratuit' },
+  { icon: Timer, label: 'Intervention rapide' },
+  { icon: ShieldCheck, label: 'Assurance décennale' },
+  { icon: BadgeCheck, label: 'Normes NF C 15-100' },
+];
+---
+<section class="hero-bg relative overflow-hidden text-white">
+  <div class="container-x grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.2fr_0.8fr]">
+    <div>
+      <p class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-brand-200 ring-1 ring-white/15">
+        <span class="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
+        Électricien à {site.address.city} et alentours
+      </p>
+      <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+        Votre électricien <span class="text-brand-400">de confiance</span>, près de chez vous
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-slate-300">
+        Dépannage, installation, rénovation, mise aux normes, éclairage, borne de recharge.
+        Artisan indépendant : un seul interlocuteur, un travail soigné, un prix annoncé à l’avance.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={href('/#contact')} class="btn-primary">
+          Demander un devis gratuit <ArrowRight class="h-4 w-4" />
+        </a>
+        <a href={whatsappHref(site.whatsapp, waMessage)} target="_blank" rel="noopener" class="btn-wa">
+          <IconWhatsApp class="h-4.5 w-4.5" /> Écrire sur WhatsApp
+        </a>
+      </div>
+
+      <ul class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-slate-200">
+        {badges.map(({ icon: Icon, label }) => (
+          <li class="flex items-center gap-2 whitespace-nowrap">
+            <Icon class="h-5 w-5 shrink-0 text-brand-400" />
+            <span>{label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <aside class="rounded-2xl bg-white p-6 text-slate-800 shadow-2xl shadow-black/30 sm:p-7" aria-labelledby="hero-contact-title">
+      <h2 id="hero-contact-title" class="text-lg font-bold text-navy-900">Besoin d’un électricien ?</h2>
+      <p class="mt-1 text-sm text-slate-500">Réponse rapide, du lundi au samedi.</p>
+
+      <ul class="mt-5 space-y-3">
+        <li>
+          <a href={telHref(site.phone)} class="flex items-center gap-4 rounded-xl border border-slate-200 p-3.5 transition hover:border-brand-400 hover:bg-brand-50">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700"><Phone class="h-5 w-5" /></span>
+            <span class="min-w-0">
+              <span class="block text-xs font-medium text-slate-500">Appeler</span>
+              <span class="block truncate text-base font-bold text-navy-900">{formatPhone(site.phone)}</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={whatsappHref(site.whatsapp, waMessage)} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-xl border border-slate-200 p-3.5 transition hover:border-wa-500 hover:bg-green-50">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-green-100 text-wa-700"><IconWhatsApp class="h-5 w-5" /></span>
+            <span class="min-w-0">
+              <span class="block text-xs font-medium text-slate-500">WhatsApp</span>
+              <span class="block text-base font-bold text-navy-900">Envoyer un message ou une photo</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href={mailtoHref(site.email, 'Demande de devis')} class="flex items-center gap-4 rounded-xl border border-slate-200 p-3.5 transition hover:border-navy-700 hover:bg-slate-50">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-navy-800"><Mail class="h-5 w-5" /></span>
+            <span class="min-w-0">
+              <span class="block text-xs font-medium text-slate-500">E-mail</span>
+              <span class="block truncate text-base font-bold text-navy-900">{site.email}</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="mt-5 space-y-1 text-sm text-slate-600">
+        {site.hours.map((h) => (
+          <li class="flex items-center gap-2">
+            <Clock class="h-4 w-4 text-slate-400" />
+            <span><span class="font-medium text-slate-800">{h.label}</span> : {h.opens.replace(':', 'h')} – {h.closes.replace(':', 'h')}</span>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+</section>
+
+{site.urgence && (
+  <div class="border-b border-brand-300 bg-brand-50">
+    <p class="container-x flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-3 text-center text-sm text-navy-900">
+      <span class="inline-flex items-center gap-1.5 font-semibold"><Zap class="h-4 w-4 text-brand-600" /> Panne ou urgence électrique ?</span>
+      <span>Appelez directement le</span>
+      <a href={telHref(site.phone)} class="font-bold underline decoration-brand-500 decoration-2 underline-offset-2">{formatPhone(site.phone)}</a>
+    </p>
+  </div>
+)}

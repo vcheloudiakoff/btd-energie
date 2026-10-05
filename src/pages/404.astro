@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/utils';
+---
+<Base title="Page introuvable" noindex>
+  <section class="container-x flex flex-col items-center py-28 text-center">
+    <p class="eyebrow">Erreur 404</p>
+    <h1 class="h2">Cette page n’existe pas</h1>
+    <p class="lead">Le lien est peut-être ancien ou mal orthographié.</p>
+    <a href={href('/')} class="btn-primary mt-8">Retour à l’accueil</a>
+  </section>
+</Base>

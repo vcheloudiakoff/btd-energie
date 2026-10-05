@@ -1,0 +1,28 @@
+---
+import { etapes } from '../data/site';
+import { href } from '../lib/utils';
+---
+<section id="etapes" class="section scroll-mt-20 bg-navy-900 text-white">
+  <div class="container-x">
+    <div class="max-w-2xl">
+      <span class="eyebrow text-brand-400!">Comment ça se passe</span>
+      <h2 class="h2 text-white!">Simple, en trois étapes</h2>
+    </div>
+
+    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+      {etapes.map((e, i) => (
+        <li class="relative rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500 text-base font-extrabold text-navy-950">
+            {i + 1}
+          </span>
+          <h3 class="mt-5 text-lg font-bold">{e.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-slate-300">{e.text}</p>
+        </li>
+      ))}
+    </ol>
+
+    <div class="mt-10">
+      <a href={href('/#contact')} class="btn-primary">Demander un devis gratuit</a>
+    </div>
+  </div>
+</section>
