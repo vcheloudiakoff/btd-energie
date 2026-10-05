@@ -1,39 +1,32 @@
 ---
 import { MapPin } from '@lucide/astro';
 import { site } from '../data/site';
-import { href } from '../lib/utils';
 ---
-<section id="zone" class="section scroll-mt-20">
-  <div class="container-x grid gap-10 lg:grid-cols-2 lg:items-center">
+<section id="zone" class="scroll-mt-24 bg-teal-700 text-white">
+  <div class="container-x grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.2fr_0.8fr]">
     <div>
-      <span class="eyebrow">Zone d’intervention</span>
-      <h2 class="h2">{site.address.city} et ses environs</h2>
-      <p class="lead">
-        J’interviens à {site.address.city} et dans un rayon d’environ {site.radiusKm} km
+      <span class="eyebrow text-teal-200!">Zone d'intervention</span>
+      <h2 class="h2 text-white!">{site.address.city} et ses environs</h2>
+      <p class="lead max-w-xl text-teal-50!">
+        J'interviens à {site.address.city} et dans un rayon d'environ {site.radiusKm} km
         {site.address.department && <> ({site.address.department})</>}.
-        Pour un chantier plus éloigné, contactez-moi : je me déplace selon l’ampleur des travaux.
+        Pour un chantier plus éloigné, contactez-moi : je me déplace selon l'ampleur des travaux.
       </p>
       {site.zones.length > 0 && (
         <ul class="mt-6 flex flex-wrap gap-2">
-          {site.zones.map((z) => (
-            <li class="rounded-full bg-slate-100 px-3.5 py-1.5 text-sm font-medium text-slate-700">{z}</li>
-          ))}
+          {site.zones.map((z) => <li class="rounded-full bg-white/15 px-3.5 py-1.5 text-sm font-semibold">{z}</li>)}
         </ul>
       )}
-      <a href={href('/#contact')} class="btn-dark mt-8">Vérifier ma commune</a>
     </div>
-
-    <div class="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-slate-200">
-      <div class="absolute inset-0 opacity-60 [background-image:radial-gradient(circle,theme(--color-slate-300)_1px,transparent_1px)] [background-size:18px_18px]"></div>
-      <div class="absolute h-56 w-56 rounded-full bg-brand-400/20 ring-2 ring-brand-500/40 sm:h-72 sm:w-72"></div>
-      <div class="absolute h-32 w-32 rounded-full bg-brand-400/25 sm:h-40 sm:w-40"></div>
-      <div class="relative flex flex-col items-center gap-2 text-center">
-        <span class="flex h-12 w-12 items-center justify-center rounded-full bg-navy-900 text-brand-400 shadow-lg">
-          <MapPin class="h-6 w-6" />
-        </span>
-        <span class="rounded-md bg-white px-3 py-1 text-sm font-bold text-navy-900 shadow">{site.address.city}</span>
-        <span class="text-xs font-medium text-slate-500">≈ {site.radiusKm} km autour</span>
-      </div>
+    <div class="relative mx-auto flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72" aria-hidden="true">
+      <span class="absolute inset-0 rounded-full bg-white/10"></span>
+      <span class="absolute inset-8 rounded-full bg-white/10"></span>
+      <span class="absolute inset-16 rounded-full bg-white/15"></span>
+      <span class="relative flex flex-col items-center gap-1">
+        <MapPin class="h-10 w-10 text-amber-300" />
+        <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-800">{site.address.city}</span>
+        <span class="text-xs text-teal-100">≈ {site.radiusKm} km</span>
+      </span>
     </div>
   </div>
 </section>

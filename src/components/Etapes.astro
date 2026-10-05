@@ -1,28 +1,22 @@
 ---
 import { etapes } from '../data/site';
-import { href } from '../lib/utils';
 ---
-<section id="etapes" class="section scroll-mt-20 bg-navy-900 text-white">
+<section class="section">
   <div class="container-x">
-    <div class="max-w-2xl">
-      <span class="eyebrow text-brand-400!">Comment ça se passe</span>
-      <h2 class="h2 text-white!">Simple, en trois étapes</h2>
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="eyebrow">Comment ça se passe</span>
+      <h2 class="h2">Simple, en trois étapes</h2>
     </div>
 
-    <ol class="mt-12 grid gap-6 md:grid-cols-3">
+    <ol class="relative mt-14 grid gap-10 md:grid-cols-3">
+      <span class="absolute top-7 right-[16%] left-[16%] hidden border-t-2 border-dashed border-teal-200 md:block" aria-hidden="true"></span>
       {etapes.map((e, i) => (
-        <li class="relative rounded-2xl bg-white/5 p-6 ring-1 ring-white/10">
-          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500 text-base font-extrabold text-navy-950">
-            {i + 1}
-          </span>
-          <h3 class="mt-5 text-lg font-bold">{e.title}</h3>
-          <p class="mt-2 text-sm leading-relaxed text-slate-300">{e.text}</p>
+        <li class="relative flex flex-col items-center text-center">
+          <span class="flex h-14 w-14 items-center justify-center rounded-full bg-teal-700 text-xl font-extrabold text-white ring-8 ring-white">{i + 1}</span>
+          <h3 class="mt-5 text-lg font-bold text-slate-900">{e.title}</h3>
+          <p class="mt-2 max-w-xs text-sm leading-relaxed text-slate-600">{e.text}</p>
         </li>
       ))}
     </ol>
-
-    <div class="mt-10">
-      <a href={href('/#contact')} class="btn-primary">Demander un devis gratuit</a>
-    </div>
   </div>
 </section>

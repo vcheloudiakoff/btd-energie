@@ -29,6 +29,10 @@ export const site = {
   whatsapp: '+33600000000', // À COMPLÉTER (souvent le même numéro)
   email: 'contact@exemple.fr', // À COMPLÉTER
 
+  /** Photo de David (portrait ou chantier) affichée dans l'en-tête de page.
+   *  Déposer le fichier dans public/photos/ puis indiquer ex. '/photos/david.jpg'. Vide = visuel neutre. */
+  photo: '',
+
   address: {
     street: '', // Laisser vide pour ne pas afficher l'adresse (artisan sans local)
     postalCode: '00000', // À COMPLÉTER

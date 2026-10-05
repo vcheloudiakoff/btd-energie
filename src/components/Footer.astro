@@ -15,36 +15,36 @@ const liens = [
   { label: 'Contact & devis', to: '/#contact' },
 ];
 ---
-<footer class="bg-navy-950 text-slate-300">
+<footer class="border-t border-slate-100 bg-slate-50">
   <div class="container-x grid gap-10 py-14 md:grid-cols-3">
     <div>
-      <a href={href('/')} class="flex items-center gap-2.5 text-white">
-        <Logo class="h-9 w-9" />
-        <span class="font-bold">{site.name}</span>
+      <a href={href('/')} class="flex items-center gap-2.5">
+        <Logo class="h-10 w-10" />
+        <span class="text-lg font-extrabold tracking-tight text-slate-900">{site.name}</span>
       </a>
-      <p class="mt-4 text-sm leading-relaxed text-slate-400">{site.description}</p>
+      <p class="mt-4 text-sm leading-relaxed text-slate-500">{site.description}</p>
     </div>
 
     <div>
-      <h2 class="text-sm font-semibold uppercase tracking-wider text-white">Contact</h2>
-      <ul class="mt-4 space-y-3 text-sm">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900">Contact</h2>
+      <ul class="mt-4 space-y-3 text-sm text-slate-600">
         <li>
-          <a href={telHref(site.phone)} class="inline-flex items-center gap-2.5 hover:text-white">
-            <Phone class="h-4 w-4 text-brand-400" />{formatPhone(site.phone)}
+          <a href={telHref(site.phone)} class="inline-flex items-center gap-2.5 font-semibold hover:text-teal-700">
+            <Phone class="h-4 w-4 text-teal-700" />{formatPhone(site.phone)}
           </a>
         </li>
         <li>
-          <a href={whatsappHref(site.whatsapp)} target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 hover:text-white">
-            <IconWhatsApp class="h-4 w-4 text-wa-500" />WhatsApp
+          <a href={whatsappHref(site.whatsapp)} target="_blank" rel="noopener" class="inline-flex items-center gap-2.5 font-semibold hover:text-teal-700">
+            <IconWhatsApp class="h-4 w-4 text-wa-600" />WhatsApp
           </a>
         </li>
         <li>
-          <a href={mailtoHref(site.email)} class="inline-flex items-center gap-2.5 hover:text-white">
-            <Mail class="h-4 w-4 text-brand-400" />{site.email}
+          <a href={mailtoHref(site.email)} class="inline-flex items-center gap-2.5 font-semibold hover:text-teal-700">
+            <Mail class="h-4 w-4 text-teal-700" />{site.email}
           </a>
         </li>
         <li class="inline-flex items-start gap-2.5">
-          <MapPin class="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+          <MapPin class="mt-0.5 h-4 w-4 shrink-0 text-teal-700" />
           <span>
             {site.address.street && <>{site.address.street}<br /></>}
             {site.address.postalCode} {site.address.city} et alentours ({site.radiusKm} km)
@@ -54,21 +54,21 @@ const liens = [
     </div>
 
     <div>
-      <h2 class="text-sm font-semibold uppercase tracking-wider text-white">Le site</h2>
-      <ul class="mt-4 space-y-2 text-sm">
+      <h2 class="text-sm font-bold uppercase tracking-wider text-slate-900">Le site</h2>
+      <ul class="mt-4 space-y-2 text-sm text-slate-600">
         {liens.map((l) => (
-          <li><a href={href(l.to)} class="hover:text-white">{l.label}</a></li>
+          <li><a href={href(l.to)} class="hover:text-teal-700">{l.label}</a></li>
         ))}
       </ul>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
+  <div class="border-t border-slate-200">
     <div class="container-x flex flex-col gap-2 py-5 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {site.name} · {site.legal.form} · SIRET {site.legal.siret}</p>
       <p class="flex gap-4">
-        <a href={href('/mentions-legales/')} class="hover:text-white">Mentions légales</a>
-        <a href={href('/confidentialite/')} class="hover:text-white">Confidentialité</a>
+        <a href={href('/mentions-legales/')} class="hover:text-slate-900">Mentions légales</a>
+        <a href={href('/confidentialite/')} class="hover:text-slate-900">Confidentialité</a>
       </p>
     </div>
   </div>

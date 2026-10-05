@@ -1,5 +1,5 @@
 ---
-import { Zap, House, ShieldCheck, Lightbulb, PlugZap, Smartphone, Thermometer, Network, Wrench, ArrowUpRight } from '@lucide/astro';
+import { Zap, House, ShieldCheck, Lightbulb, PlugZap, Smartphone, Thermometer, Network, Wrench, ArrowRight } from '@lucide/astro';
 import { site, services } from '../data/site';
 import { whatsappHref } from '../lib/utils';
 
@@ -7,34 +7,27 @@ import { whatsappHref } from '../lib/utils';
 const icons = { Zap, House, ShieldCheck, Lightbulb, PlugZap, Smartphone, Thermometer, Network, Wrench };
 type IconName = keyof typeof icons;
 ---
-<section id="services" class="section scroll-mt-20">
+<section id="services" class="section scroll-mt-24">
   <div class="container-x">
-    <div class="max-w-2xl">
+    <div class="mx-auto max-w-2xl text-center">
       <span class="eyebrow">Services</span>
-      <h2 class="h2">Tous vos travaux d’électricité</h2>
-      <p class="lead">
-        Du simple dépannage à la rénovation complète, pour les particuliers comme pour les professionnels.
-      </p>
+      <h2 class="h2">Tous vos travaux d'électricité</h2>
+      <p class="lead">Du simple dépannage à la rénovation complète, pour les particuliers comme pour les professionnels.</p>
     </div>
 
-    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {services.map((s) => {
         const Icon = icons[s.icon as IconName] ?? Wrench;
         const wa = whatsappHref(site.whatsapp, `Bonjour ${site.owner}, je souhaite un devis pour ${s.devis}.`);
         return (
-          <li class="card group flex flex-col transition hover:-translate-y-0.5 hover:shadow-md">
-            <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-100 text-brand-700">
-              <Icon class="h-6 w-6" />
+          <li class="card group transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
+            <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white">
+              <Icon class="h-7 w-7" />
             </span>
-            <h3 class="mt-5 text-lg font-bold text-navy-900">{s.title}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{s.description}</p>
-            <a
-              href={wa}
-              target="_blank"
-              rel="noopener"
-              class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy-800 hover:text-brand-700"
-            >
-              Demander un devis <ArrowUpRight class="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <h3 class="mt-6 text-lg font-bold text-slate-900">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{s.description}</p>
+            <a href={wa} target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900">
+              Demander un devis <ArrowRight class="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
           </li>
         );

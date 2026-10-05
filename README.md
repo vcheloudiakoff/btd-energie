@@ -50,34 +50,26 @@ dans le tableau `realisations`.
 src/
 ├── data/site.ts          ← toutes les infos de l'entreprise
 ├── lib/utils.ts          ← liens tel:, wa.me, mailto:, préfixe d'URL
+├── lib/form-contact.ts   ← formulaire de devis : compose le message → WhatsApp ou e-mail
 ├── layouts/Base.astro    ← <head> SEO, en-tête, pied de page, bouton WhatsApp
-├── components/           ← une section = un composant (Hero, Services, Contact…)
+├── components/           ← une section = un composant (Hero, Garanties, Services, Contact…)
 ├── pages/
 │   ├── index.astro       ← page d'accueil (toutes les sections)
 │   ├── mentions-legales.astro
 │   ├── confidentialite.astro
 │   ├── 404.astro
 │   └── robots.txt.ts     ← robots.txt généré avec l'URL du sitemap
-└── styles/global.css     ← couleurs (jaune « électricité » + bleu nuit), classes btn/card…
+└── styles/global.css     ← thème (vert-bleu, Manrope), classes btn/card/field…
 scripts/generate-images.mjs ← image de partage (Open Graph) et icône iOS
 .github/workflows/deploy.yml ← déploiement GitHub Pages
 ```
 
-## Variantes de design (phase de choix)
+## Design
 
-Trois propositions alternatives, avec le même contenu, sont publiées en brouillon
-(hors sitemap, `noindex`) pour choisir une direction :
-
-| Page | Style |
-|---|---|
-| `/variantes/` | Page de comparaison |
-| `/variantes/a/` | « Chantier » : noir & jaune, capitales condensées, barre Appeler / WhatsApp fixe sur mobile |
-| `/variantes/b/` | « Lumière » : clair, vert-bleu, arrondis, orienté confiance |
-| `/variantes/c/` | « Haute tension » : sombre premium, accents cyan, grille bento |
-
-Une fois le choix fait : copier la variante retenue vers `src/pages/index.astro`
-(ou garder l'original), puis supprimer `src/pages/variantes/`, `src/layouts/Shell.astro`,
-`src/components/VariantSwitcher.astro` et les polices inutilisées dans `package.json`.
+Direction retenue (octobre 2026) : « Lumière » — fond clair, vert-bleu (`teal`) comme
+couleur principale, touches ambre, arrondis généreux, police Manrope auto-hébergée.
+Les couleurs et classes communes (`btn-primary`, `card`, `eyebrow`…) sont dans
+`src/styles/global.css`.
 
 ## Déploiement
 

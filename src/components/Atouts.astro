@@ -1,32 +1,27 @@
 ---
 import { Check } from '@lucide/astro';
 import { site, atouts } from '../data/site';
+import { href } from '../lib/utils';
 ---
-<section id="atouts" class="section scroll-mt-20 bg-slate-50">
-  <div class="container-x grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-    <div class="lg:sticky lg:top-24">
+<section id="atouts" class="section scroll-mt-24 bg-slate-50">
+  <div class="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
+    <div>
       <span class="eyebrow">Pourquoi me choisir</span>
-      <h2 class="h2">Un artisan, pas un intermédiaire</h2>
+      <h2 class="h2">Un artisan qui s'engage, pas un intermédiaire</h2>
       <p class="lead">
-        Je suis {site.owner}, électricien indépendant. Je réalise moi-même chaque intervention :
-        vous parlez à la personne qui fera le travail, et vous la retrouvez sur le chantier.
+        Je suis {site.owner}, électricien indépendant. Je réalise moi-même chaque intervention : vous parlez à la
+        personne qui fera le travail, et vous la retrouvez sur le chantier. Une installation sûre, conforme et
+        durable, expliquée clairement, au prix annoncé.
       </p>
-      <p class="mt-4 text-slate-600">
-        Mon objectif est simple : une installation sûre, conforme et durable, expliquée clairement,
-        au prix annoncé.
-      </p>
+      <a href={href('/#contact')} class="btn-dark mt-8">Parlons de votre projet</a>
     </div>
 
     <ul class="grid gap-4 sm:grid-cols-2">
       {atouts.map((a) => (
-        <li class="card flex gap-4 p-5!">
-          <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-500 text-navy-950">
-            <Check class="h-4.5 w-4.5" stroke-width={3} />
-          </span>
-          <div>
-            <h3 class="font-bold text-navy-900">{a.title}</h3>
-            <p class="mt-1 text-sm leading-relaxed text-slate-600">{a.text}</p>
-          </div>
+        <li class="card p-6!">
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-teal-700 text-white"><Check class="h-4.5 w-4.5" stroke-width={3} /></span>
+          <h3 class="mt-4 font-bold text-slate-900">{a.title}</h3>
+          <p class="mt-1 text-sm leading-relaxed text-slate-600">{a.text}</p>
         </li>
       ))}
     </ul>

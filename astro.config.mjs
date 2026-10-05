@@ -21,6 +21,5 @@ export default defineConfig({
   base: '/btd-energie',
   trailingSlash: 'ignore',
   vite: { plugins: [tailwindcss()] },
-  // Les variantes de design (/variantes/…) sont des brouillons : hors sitemap et noindex.
-  integrations: [sitemap({ filter: (page) => !page.includes('/variantes/') })],
+  integrations: [sitemap()],
 });

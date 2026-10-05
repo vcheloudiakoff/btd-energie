@@ -1,46 +1,40 @@
 ---
-import { Phone, Menu, X } from '@lucide/astro';
+import { Menu, Phone, X } from '@lucide/astro';
 import { site } from '../data/site';
 import { href, telHref, formatPhone } from '../lib/utils';
 import Logo from './Logo.astro';
 
 const nav = [
   { label: 'Services', to: '/#services' },
+  { label: 'Atouts', to: '/#atouts' },
   { label: 'Zone', to: '/#zone' },
   { label: 'Réalisations', to: '/#realisations' },
   { label: 'Avis', to: '/#avis' },
   { label: 'FAQ', to: '/#faq' },
-  { label: 'Contact', to: '/#contact' },
 ];
 ---
-<header class="no-print sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
-  <div class="container-x flex h-16 items-center justify-between gap-4">
-    <a href={href('/')} class="flex items-center gap-2.5 text-navy-900" aria-label={`${site.name} — accueil`}>
-      <Logo class="h-9 w-9 shrink-0" />
-      <span class="leading-tight">
-        <span class="block text-[15px] font-bold">{site.name}</span>
-        <span class="hidden text-xs text-slate-500 sm:block">{site.tagline}</span>
-      </span>
+<header class="no-print sticky top-0 z-40 border-b border-slate-100 bg-white/85 backdrop-blur">
+  <div class="container-x flex h-18 items-center justify-between gap-3">
+    <a href={href('/')} class="flex min-w-0 items-center gap-2.5" aria-label={`${site.name} — accueil`}>
+      <Logo class="h-10 w-10 shrink-0" />
+      <span class="truncate text-lg font-extrabold tracking-tight text-slate-900">{site.name}</span>
     </a>
 
-    <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex" aria-label="Navigation principale">
+    <nav class="hidden items-center gap-1 rounded-full bg-slate-100 p-1 text-sm font-semibold text-slate-600 lg:flex" aria-label="Navigation principale">
       {nav.map((item) => (
-        <a href={href(item.to)} class="transition hover:text-navy-900">{item.label}</a>
+        <a href={href(item.to)} class="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900 hover:shadow-sm">{item.label}</a>
       ))}
     </nav>
 
-    <div class="flex items-center gap-2">
-      <a href={telHref(site.phone)} class="btn-primary hidden py-2.5! sm:inline-flex">
-        <Phone class="h-4 w-4" />
-        <span>{formatPhone(site.phone)}</span>
-      </a>
-      <a href={telHref(site.phone)} class="btn-primary px-3! py-2.5! sm:hidden" aria-label="Appeler">
+    <div class="flex shrink-0 items-center gap-2">
+      <a href={telHref(site.phone)} class="hidden h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition hover:bg-slate-200 sm:flex" aria-label={`Appeler le ${formatPhone(site.phone)}`}>
         <Phone class="h-5 w-5" />
       </a>
+      <a href={href('/#contact')} class="btn-primary px-5! py-3! shadow-none">Devis gratuit</a>
       <button
         id="menu-btn"
         type="button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-lg text-navy-900 ring-1 ring-slate-200 md:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-700 lg:hidden"
         aria-expanded="false"
         aria-controls="menu-mobile"
         aria-label="Ouvrir le menu"
@@ -51,13 +45,16 @@ const nav = [
     </div>
   </div>
 
-  <nav id="menu-mobile" class="hidden border-t border-slate-200 bg-white md:hidden" aria-label="Navigation mobile">
+  <nav id="menu-mobile" class="hidden border-t border-slate-100 bg-white lg:hidden" aria-label="Navigation mobile">
     <ul class="container-x flex flex-col py-2">
-      {nav.map((item) => (
+      {[...nav, { label: 'Contact & devis', to: '/#contact' }].map((item) => (
         <li>
-          <a href={href(item.to)} class="block py-3 text-base font-medium text-slate-800">{item.label}</a>
+          <a href={href(item.to)} class="block py-3 text-base font-semibold text-slate-800">{item.label}</a>
         </li>
       ))}
+      <li class="py-3 sm:hidden">
+        <a href={telHref(site.phone)} class="btn-light w-full"><Phone class="h-4 w-4 text-teal-700" /> {formatPhone(site.phone)}</a>
+      </li>
     </ul>
   </nav>
 </header>
@@ -67,11 +64,11 @@ const nav = [
   const menu = document.getElementById('menu-mobile');
   if (btn && menu) {
     const setOpen = (open: boolean) => {
-      menu.classList.toggle('hidden', open!);
+      menu.classList.toggle('hidden', !open);
       btn.setAttribute('aria-expanded', String(open));
       btn.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
       btn.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
-      btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', open!);
+      btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', !open);
     };
     btn.addEventListener('click', () => setOpen(menu.classList.contains('hidden')));
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
