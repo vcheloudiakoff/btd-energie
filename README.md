@@ -63,6 +63,22 @@ scripts/generate-images.mjs ← image de partage (Open Graph) et icône iOS
 .github/workflows/deploy.yml ← déploiement GitHub Pages
 ```
 
+## Variantes de design (phase de choix)
+
+Trois propositions alternatives, avec le même contenu, sont publiées en brouillon
+(hors sitemap, `noindex`) pour choisir une direction :
+
+| Page | Style |
+|---|---|
+| `/variantes/` | Page de comparaison |
+| `/variantes/a/` | « Chantier » : noir & jaune, capitales condensées, barre Appeler / WhatsApp fixe sur mobile |
+| `/variantes/b/` | « Lumière » : clair, vert-bleu, arrondis, orienté confiance |
+| `/variantes/c/` | « Haute tension » : sombre premium, accents cyan, grille bento |
+
+Une fois le choix fait : copier la variante retenue vers `src/pages/index.astro`
+(ou garder l'original), puis supprimer `src/pages/variantes/`, `src/layouts/Shell.astro`,
+`src/components/VariantSwitcher.astro` et les polices inutilisées dans `package.json`.
+
 ## Déploiement
 
 1. **Une seule fois** : sur GitHub, *Settings → Pages → Build and deployment → Source : GitHub Actions*.

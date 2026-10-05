@@ -1,0 +1,33 @@
+---
+/**
+ * Coquille minimale (head + body vide) pour les variantes de design :
+ * chaque variante dessine son propre en-tête, pied de page et bouton WhatsApp.
+ * Les variantes sont en noindex : ce sont des brouillons de comparaison.
+ */
+import '../styles/global.css';
+import { site } from '../data/site';
+import { href } from '../lib/utils';
+
+interface Props {
+  title: string;
+  bodyClass?: string;
+  themeColor?: string;
+}
+const { title, bodyClass = '', themeColor = '#0b1b36' } = Astro.props;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · {site.name}</title>
+    <meta name="description" content={site.description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href={href('/favicon.svg')} />
+    <meta name="theme-color" content={themeColor} />
+    <slot name="head" />
+  </head>
+  <body class={`min-h-dvh antialiased ${bodyClass}`}>
+    <slot />
+  </body>
+</html>

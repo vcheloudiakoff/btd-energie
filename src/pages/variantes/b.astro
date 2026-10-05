@@ -1,0 +1,284 @@
+---
+/**
+ * VARIANTE B — « Lumière »
+ * Clair, vert-bleu « énergie », arrondis généreux, beaucoup d'air.
+ * Orientée confiance : avis, étapes, garanties bien visibles.
+ */
+import '@fontsource-variable/manrope';
+import { Phone, Mail, Clock, MapPin, ArrowRight, Check, ChevronDown, Zap, Camera, Star, ShieldCheck, FileCheck, Timer, BadgeCheck, Sparkles, House, Lightbulb, PlugZap, Smartphone, Thermometer, Network, Wrench } from '@lucide/astro';
+import Shell from '../../layouts/Shell.astro';
+import VariantSwitcher from '../../components/VariantSwitcher.astro';
+import IconWhatsApp from '../../components/IconWhatsApp.astro';
+import { site, services, atouts, etapes, realisations, avis, faq } from '../../data/site';
+import { href, telHref, formatPhone, whatsappHref, mailtoHref, digits } from '../../lib/utils';
+
+const icons = { Zap, House, ShieldCheck, Lightbulb, PlugZap, Smartphone, Thermometer, Network, Wrench };
+const wa = (text: string) => whatsappHref(site.whatsapp, text);
+const waHello = wa(`Bonjour ${site.owner}, je souhaite un devis / renseignement pour `);
+const nav = [['Services', '#services'], ['Atouts', '#atouts'], ['Zone', '#zone'], ['Réalisations', '#realisations'], ['Avis', '#avis'], ['FAQ', '#faq']];
+const garanties = [
+  { icon: ShieldCheck, title: 'Assurance décennale', text: 'Travaux couverts 10 ans' },
+  { icon: BadgeCheck, title: 'Norme NF C 15-100', text: 'Installations conformes' },
+  { icon: FileCheck, title: 'Devis gratuit', text: 'Clair et sans engagement' },
+  { icon: Sparkles, title: 'Chantier propre', text: 'Protection et nettoyage' },
+];
+const initiales = (n: string) => n.split(' ').map((p) => p[0]).join('').toUpperCase();
+const year = new Date().getFullYear();
+const btn = 'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition';
+---
+<Shell title="Variante B — Lumière" bodyClass="font-manrope bg-white text-slate-700" themeColor="#0f766e">
+  <!-- En-tête -->
+  <header class="sticky top-0 z-40 border-b border-slate-100 bg-white/85 backdrop-blur">
+    <div class="mx-auto flex h-18 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <a href="#top" class="flex items-center gap-2.5">
+        <span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-700 text-white"><Zap class="h-5 w-5" /></span>
+        <span class="text-lg font-extrabold tracking-tight text-slate-900">{site.name}</span>
+      </a>
+      <nav class="hidden items-center gap-1 rounded-full bg-slate-100 p-1 text-sm font-semibold text-slate-600 lg:flex">
+        {nav.map(([l, to]) => <a href={to} class="rounded-full px-4 py-2 hover:bg-white hover:text-slate-900 hover:shadow-sm">{l}</a>)}
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href={telHref(site.phone)} class="hidden h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 sm:flex" aria-label="Appeler"><Phone class="h-5 w-5" /></a>
+        <a href="#contact" class={`${btn} bg-teal-700 text-white hover:bg-teal-800 !py-3`}>Devis gratuit</a>
+      </div>
+    </div>
+  </header>
+
+  {site.enConstruction && <p class="bg-amber-100 px-4 py-2 text-center text-sm text-amber-800">Site en cours de création — les coordonnées affichées sont des exemples.</p>}
+
+  <!-- Hero -->
+  <section id="top" class="relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-amber-50">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-2">
+      <div>
+        <p class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-sm font-semibold text-teal-800 shadow-sm ring-1 ring-teal-100"><span class="h-2 w-2 rounded-full bg-teal-500"></span> Électricien indépendant · {site.address.city}</p>
+        <h1 class="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem]">
+          L'électricité de votre maison, <span class="text-teal-700">entre de bonnes mains.</span>
+        </h1>
+        <p class="mt-6 max-w-lg text-lg leading-relaxed text-slate-600">
+          Dépannage, installation, mise aux normes, éclairage, borne de recharge. Je suis {site.owner} : je vous conseille, je chiffre clairement, et je réalise moi-même les travaux.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#contact" class={`${btn} bg-teal-700 text-white shadow-lg shadow-teal-700/20 hover:bg-teal-800`}>Demander un devis <ArrowRight class="h-4 w-4" /></a>
+          <a href={telHref(site.phone)} class={`${btn} bg-white text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50`}><Phone class="h-4 w-4 text-teal-700" /> {formatPhone(site.phone)}</a>
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
+          <li class="flex items-center gap-1.5"><Check class="h-4 w-4 text-teal-600" stroke-width={3} /> Devis gratuit</li>
+          <li class="flex items-center gap-1.5"><Check class="h-4 w-4 text-teal-600" stroke-width={3} /> Intervention sous 24–48 h</li>
+          <li class="flex items-center gap-1.5"><Check class="h-4 w-4 text-teal-600" stroke-width={3} /> Assurance décennale</li>
+        </ul>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+        <div class="flex aspect-[4/5] items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-teal-600 to-emerald-500 shadow-2xl shadow-teal-700/30 sm:aspect-[5/4] lg:aspect-[4/5]">
+          <div class="flex flex-col items-center gap-2 text-white/80"><Zap class="h-20 w-20 text-white" stroke-width={1.5} /><span class="inline-flex items-center gap-1.5 text-sm font-medium"><Camera class="h-4 w-4" /> Photo de {site.owner} à venir</span></div>
+        </div>
+        <div class="absolute -left-4 top-8 flex items-center gap-3 rounded-2xl bg-white p-3.5 pr-5 shadow-xl ring-1 ring-slate-100 sm:-left-8">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700"><Timer class="h-5 w-5" /></span>
+          <span><span class="block text-xs font-medium text-slate-500">Dépannage</span><span class="block text-sm font-bold text-slate-900">Sous 24 à 48 h</span></span>
+        </div>
+        <div class="absolute -right-3 bottom-20 flex items-center gap-3 sm:bottom-10 rounded-2xl bg-white p-3.5 pr-5 shadow-xl ring-1 ring-slate-100 sm:-right-8">
+          <span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-teal-700"><FileCheck class="h-5 w-5" /></span>
+          <span><span class="block text-xs font-medium text-slate-500">Devis</span><span class="block text-sm font-bold text-slate-900">Gratuit et détaillé</span></span>
+        </div>
+        <a href={waHello} target="_blank" rel="noopener" class="absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full bg-[#25d366] px-5 py-3 text-sm font-bold text-white shadow-xl hover:bg-[#1ebe5d]"><IconWhatsApp class="h-5 w-5" /> Écrire sur WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Garanties -->
+  <section class="mx-auto max-w-6xl px-4 sm:px-6">
+    <ul class="grid gap-px overflow-hidden rounded-3xl bg-slate-200 ring-1 ring-slate-200 sm:grid-cols-2 lg:grid-cols-4">
+      {garanties.map(({ icon: Icon, title, text }) => (
+        <li class="flex items-center gap-4 bg-white p-6">
+          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal-50 text-teal-700"><Icon class="h-6 w-6" /></span>
+          <span><span class="block font-bold text-slate-900">{title}</span><span class="block text-sm text-slate-500">{text}</span></span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="scroll-mt-24 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Services</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Tous vos travaux d'électricité</h2>
+        <p class="mt-4 text-lg text-slate-600">Du simple dépannage à la rénovation complète, pour les particuliers comme pour les professionnels.</p>
+      </div>
+      <ul class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => {
+          const Icon = icons[s.icon as keyof typeof icons] ?? Wrench;
+          return (
+            <li class="group rounded-3xl bg-white p-7 ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
+              <span class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-teal-700 transition group-hover:bg-teal-700 group-hover:text-white"><Icon class="h-7 w-7" /></span>
+              <h3 class="mt-6 text-lg font-bold text-slate-900">{s.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">{s.description}</p>
+              <a href={wa(`Bonjour ${site.owner}, je souhaite un devis pour ${s.devis}.`)} target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-teal-700 hover:text-teal-900">Demander un devis <ArrowRight class="h-4 w-4" /></a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Atouts -->
+  <section id="atouts" class="scroll-mt-24 bg-slate-50 py-20 sm:py-28">
+    <div class="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Pourquoi me choisir</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Un artisan qui s'engage, pas un intermédiaire</h2>
+        <p class="mt-4 text-lg text-slate-600">Je réalise moi-même chaque intervention : vous parlez à la personne qui fera le travail, et vous la retrouvez sur le chantier. Une installation sûre, conforme et durable, expliquée clairement, au prix annoncé.</p>
+        <a href="#contact" class={`${btn} mt-8 bg-slate-900 text-white hover:bg-slate-700`}>Parlons de votre projet</a>
+      </div>
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {atouts.map((a) => (
+          <li class="rounded-3xl bg-white p-6 ring-1 ring-slate-200">
+            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-teal-700 text-white"><Check class="h-4.5 w-4.5" stroke-width={3} /></span>
+            <h3 class="mt-4 font-bold text-slate-900">{a.title}</h3>
+            <p class="mt-1 text-sm leading-relaxed text-slate-600">{a.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Étapes -->
+  <section class="py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Comment ça se passe</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Simple, en trois étapes</h2>
+      </div>
+      <ol class="relative mt-14 grid gap-10 md:grid-cols-3">
+        <span class="absolute top-7 right-[16%] left-[16%] hidden border-t-2 border-dashed border-teal-200 md:block" aria-hidden="true"></span>
+        {etapes.map((e, i) => (
+          <li class="relative flex flex-col items-center text-center">
+            <span class="flex h-14 w-14 items-center justify-center rounded-full bg-teal-700 text-xl font-extrabold text-white ring-8 ring-white">{i + 1}</span>
+            <h3 class="mt-5 text-lg font-bold text-slate-900">{e.title}</h3>
+            <p class="mt-2 max-w-xs text-sm leading-relaxed text-slate-600">{e.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Zone -->
+  <section id="zone" class="scroll-mt-24 bg-teal-700 text-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-[1.2fr_0.8fr]">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-200">Zone d'intervention</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{site.address.city} et ses environs</h2>
+        <p class="mt-4 max-w-xl text-lg text-teal-50">J'interviens à {site.address.city} et dans un rayon d'environ {site.radiusKm} km. Pour un chantier plus éloigné, contactez-moi : je me déplace selon l'ampleur des travaux.</p>
+        {site.zones.length > 0 && <ul class="mt-6 flex flex-wrap gap-2">{site.zones.map((z) => <li class="rounded-full bg-white/15 px-3.5 py-1.5 text-sm font-semibold">{z}</li>)}</ul>}
+      </div>
+      <div class="relative mx-auto flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72">
+        <span class="absolute inset-0 rounded-full bg-white/10"></span>
+        <span class="absolute inset-8 rounded-full bg-white/10"></span>
+        <span class="absolute inset-16 rounded-full bg-white/15"></span>
+        <span class="relative flex flex-col items-center gap-1"><MapPin class="h-10 w-10 text-amber-300" /><span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-800">{site.address.city}</span><span class="text-xs text-teal-100">≈ {site.radiusKm} km</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réalisations -->
+  <section id="realisations" class="scroll-mt-24 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div><p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Réalisations</p><h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Quelques chantiers récents</h2></div>
+        <p class="max-w-sm text-slate-600">Des interventions soignées, du petit dépannage à la rénovation complète.</p>
+      </div>
+      <ul class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {realisations.map((r) => (
+          <li class="group overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
+            <div class="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-slate-100 to-teal-50 text-slate-400">
+              {r.image ? <img src={href(r.image)} alt={r.title} loading="lazy" width="800" height="600" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" /> : <span class="flex flex-col items-center gap-2"><Zap class="h-10 w-10 text-teal-600" /><span class="inline-flex items-center gap-1.5 text-xs font-medium"><Camera class="h-3.5 w-3.5" /> Photo à venir</span></span>}
+            </div>
+            <div class="p-6"><h3 class="font-bold text-slate-900">{r.title}</h3><p class="mt-1 text-sm text-slate-600">{r.text}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Avis -->
+  <section id="avis" class="scroll-mt-24 bg-slate-50 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Avis clients</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Ils m'ont fait confiance</h2>
+        {site.enConstruction && <p class="mt-3 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">Exemples d'avis — seront remplacés par de vrais avis Google</p>}
+      </div>
+      <ul class="mt-12 grid gap-6 md:grid-cols-3">
+        {avis.map((a) => (
+          <li class="flex flex-col rounded-3xl bg-white p-7 ring-1 ring-slate-200">
+            <div class="flex gap-0.5 text-amber-400">{Array.from({ length: a.rating }).map(() => <Star class="h-4.5 w-4.5 fill-current" />)}</div>
+            <p class="mt-4 flex-1 leading-relaxed text-slate-700">« {a.text} »</p>
+            <p class="mt-6 flex items-center gap-3"><span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-sm font-bold text-teal-800">{initiales(a.author)}</span><span class="font-bold text-slate-900">{a.author}</span></p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="scroll-mt-24 py-20 sm:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-700">Questions fréquentes</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Vous vous demandez…</h2>
+      </div>
+      <div class="mt-12 grid gap-4 md:grid-cols-2">
+        {faq.map((f) => (
+          <details class="group rounded-3xl bg-white p-6 ring-1 ring-slate-200 open:ring-teal-300">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-bold text-slate-900">{f.q}<ChevronDown class="h-5 w-5 shrink-0 text-slate-400 transition group-open:rotate-180" /></summary>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="scroll-mt-24 px-4 pb-20 sm:px-6 sm:pb-28">
+    <div class="mx-auto grid max-w-6xl gap-10 overflow-hidden rounded-[2.5rem] bg-teal-800 p-6 text-white sm:p-10 lg:grid-cols-[0.9fr_1.1fr] lg:p-14">
+      <div>
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-teal-200">Contact & devis</p>
+        <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Parlons de votre projet</h2>
+        <p class="mt-4 text-teal-50">Décrivez votre besoin, envoyez une photo si possible : je vous réponds rapidement avec un premier avis et un devis gratuit.</p>
+        <ul class="mt-8 space-y-4">
+          <li><a href={telHref(site.phone)} class="flex items-center gap-4 rounded-2xl bg-white/10 p-4 hover:bg-white/15"><Phone class="h-5 w-5 text-amber-300" /><span><span class="block text-xs text-teal-200">Téléphone</span><span class="block font-bold">{formatPhone(site.phone)}</span></span></a></li>
+          <li><a href={waHello} target="_blank" rel="noopener" class="flex items-center gap-4 rounded-2xl bg-white/10 p-4 hover:bg-white/15"><IconWhatsApp class="h-5 w-5 text-[#25d366]" /><span><span class="block text-xs text-teal-200">WhatsApp</span><span class="block font-bold">{formatPhone(site.whatsapp)}</span></span></a></li>
+          <li><a href={mailtoHref(site.email, 'Demande de devis')} class="flex items-center gap-4 rounded-2xl bg-white/10 p-4 hover:bg-white/15"><Mail class="h-5 w-5 text-amber-300" /><span><span class="block text-xs text-teal-200">E-mail</span><span class="block font-bold break-all">{site.email}</span></span></a></li>
+          <li class="flex items-center gap-4 p-4"><Clock class="h-5 w-5 text-amber-300" /><span class="text-sm">{site.hours.map((h) => <span class="block"><span class="font-bold">{h.label}</span> : {h.opens.replace(':', 'h')} – {h.closes.replace(':', 'h')}</span>)}</span></li>
+        </ul>
+      </div>
+      <form data-wa={digits(site.whatsapp)} data-email={site.email} data-owner={site.owner} novalidate class="rounded-3xl bg-white p-6 text-slate-700 sm:p-8">
+        <h3 class="text-xl font-extrabold text-slate-900">Demande de devis</h3>
+        <p class="mt-1 text-sm text-slate-500">Le message est préparé pour vous, puis envoyé depuis votre WhatsApp ou votre messagerie.</p>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          <label class="block text-sm font-semibold text-slate-800">Votre nom<input name="nom" required placeholder="Prénom Nom" class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-normal focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20" /></label>
+          <label class="block text-sm font-semibold text-slate-800">Votre téléphone<input name="tel" type="tel" required placeholder="06 00 00 00 00" class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-normal focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20" /></label>
+          <label class="block text-sm font-semibold text-slate-800 sm:col-span-2">Votre demande<select name="type" class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-normal focus:border-teal-500 focus:bg-white focus:outline-none">{services.map((s) => <option value={s.title}>{s.title}</option>)}<option value="Autre demande">Autre demande</option></select></label>
+          <label class="block text-sm font-semibold text-slate-800 sm:col-span-2">Détails <span class="font-normal text-slate-400">(facultatif)</span><textarea name="message" rows="4" placeholder="Décrivez votre besoin, le type de logement, l'urgence…" class="mt-1.5 block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-normal focus:border-teal-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal-500/20"></textarea></label>
+        </div>
+        <p data-error class="mt-3 hidden text-sm font-semibold text-red-600" role="alert"></p>
+        <div class="mt-6 grid gap-3 sm:grid-cols-2">
+          <button type="submit" data-via="whatsapp" class={`${btn} bg-[#25d366] text-white hover:bg-[#1ebe5d]`}><IconWhatsApp class="h-4.5 w-4.5" /> Envoyer sur WhatsApp</button>
+          <button type="submit" data-via="email" class={`${btn} bg-slate-100 text-slate-900 hover:bg-slate-200`}><Mail class="h-4 w-4" /> Envoyer par e-mail</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="border-t border-slate-100 bg-slate-50">
+    <div class="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <p><span class="font-bold text-slate-800">{site.name}</span> · © {year} · {site.legal.form} · SIRET {site.legal.siret}</p>
+      <p class="flex gap-4"><a href={href('/mentions-legales/')} class="hover:text-slate-900">Mentions légales</a><a href={href('/confidentialite/')} class="hover:text-slate-900">Confidentialité</a></p>
+    </div>
+  </footer>
+
+  <a href={waHello} target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp" class="fixed right-4 bottom-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-xl shadow-green-700/30 hover:bg-[#1ebe5d] sm:right-6 sm:bottom-6"><IconWhatsApp class="h-7 w-7" /></a>
+  <VariantSwitcher current="b" />
+</Shell>
+
+<script src="../../lib/form-contact.ts"></script>

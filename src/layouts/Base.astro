@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import JsonLd from '../components/JsonLd.astro';
 import { Construction } from '@lucide/astro';
+import VariantSwitcher from '../components/VariantSwitcher.astro';
 
 interface Props {
   /** Titre de la page (sans le nom du site). Vide = page d'accueil. */
@@ -74,5 +75,6 @@ const ogImage = absolute('/og.png', Astro.site);
 
     <Footer />
     <WhatsAppButton />
+    {site.enConstruction && <VariantSwitcher current="original" />}
   </body>
 </html>
